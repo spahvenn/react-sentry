@@ -10,14 +10,15 @@ import {
   useLocation,
   useNavigationType,
 } from "react-router-dom";
-import { NotAFunction } from "./routes/NotAFunction.tsx"; // Provider imports 'rollbar'
+import { NotAFunction } from "./routes/NotAFunction.tsx";
 
 import * as Sentry from "@sentry/react";
 import NonExistingProperty from "./routes/NonExistingProperty.tsx";
+import InvalidApiResponse from "./routes/InvalidApiResponse.tsx";
 
 Sentry.init({
   environment: "development",
-  dsn: import.meta.env.SENTRY_DNS,
+  dsn: import.meta.env.VITE_SENTRY_DNS,
   integrations: [
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "access-non-existing-property",
         element: <NonExistingProperty />,
+      },
+      {
+        path: "invalid-api-response",
+        element: <InvalidApiResponse />,
       },
     ],
   },
